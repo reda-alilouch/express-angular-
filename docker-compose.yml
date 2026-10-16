@@ -11,6 +11,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-  ba
+  backend:
+    build: ./backend
+    container_name: express-backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_NAME: express_api
+    ports:
+      - "4000:4000"
+
 volumes:
   mysql_data:
