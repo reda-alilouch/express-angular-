@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import { testConnection } from "./config/database";
+import adminRouter from "./routes/user.routes";
 
 const app = express();
 const PORT = Number(process.env.PORT);
@@ -23,6 +24,9 @@ app.use((_req, res) => {
     message: "Route introuvable",
   });
 });
+app.use("/api", adminRouter);
+
+
 
 // Start server
 async function startServer(): Promise<void> {
